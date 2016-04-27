@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ikf-rM-uNV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9sB-Cc-SUX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Restaurant Table View Controller-->
+        <!--Food Pin-->
         <scene sceneID="axW-HN-wYF">
             <objects>
                 <tableViewController id="ikf-rM-uNV" customClass="RestaurantTableViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="JPF-rz-VMb" customClass="RestaurantTableViewCell" customModule="FoodPin" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JPF-rz-VMb" id="kl4-eo-TsG">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
@@ -70,6 +70,7 @@
                                     <outlet property="nameLable" destination="Srt-b2-WFM" id="cp5-d6-0kk"/>
                                     <outlet property="thumbnailImageView" destination="vUk-cp-86d" id="dWq-9j-iEX"/>
                                     <outlet property="typeLable" destination="47L-2Q-NZv" id="I15-g9-LqW"/>
+                                    <segue destination="x8o-10-R36" kind="show" identifier="showRestaurantDetail" id="IW4-Wl-4gk"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -78,10 +79,113 @@
                             <outlet property="delegate" destination="ikf-rM-uNV" id="bQU-0b-iBd"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Food Pin" id="1Y1-NL-t3B"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLe-3L-ZaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="802" y="326"/>
+        </scene>
+        <!--Restaurant Detail View Controller-->
+        <scene sceneID="yrI-jJ-Igb">
+            <objects>
+                <viewController id="x8o-10-R36" customClass="RestaurantDetailViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zhk-0i-9YA"/>
+                        <viewControllerLayoutGuide type="bottom" id="ksj-gk-qwb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3BF-Y8-9PG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FzJ-Ls-Gf5">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.3895790039" green="0.92941176469999998" blue="0.2150231638" alpha="1" colorSpace="calibratedRGB"/>
+                                <imageView key="tableHeaderView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cafedeadend" id="ZYp-2k-1bb">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="36" id="Ly1-Od-ZZ3" customClass="RestaurantDetailTableViewCell" customModule="FoodPin" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="392" width="600" height="36"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ly1-Od-ZZ3" id="oEl-3z-zWq">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IW7-94-VdT">
+                                                    <rect key="frame" x="8" y="0.0" width="592" height="35"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ict-tg-StO">
+                                                            <rect key="frame" x="0.0" y="7" width="296" height="21"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbG-OT-llI">
+                                                            <rect key="frame" x="296" y="7" width="296" height="21"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="IW7-94-VdT" secondAttribute="bottom" id="64r-Yv-G1o"/>
+                                                <constraint firstItem="IW7-94-VdT" firstAttribute="leading" secondItem="oEl-3z-zWq" secondAttribute="leading" constant="8" id="OA9-MA-PJp"/>
+                                                <constraint firstItem="IW7-94-VdT" firstAttribute="top" secondItem="oEl-3z-zWq" secondAttribute="top" id="tjd-GX-LZE"/>
+                                                <constraint firstAttribute="trailing" secondItem="IW7-94-VdT" secondAttribute="trailing" id="vbh-Mx-olQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.92941176470588238" green="0.081044819479654043" blue="0.19560986316071005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="fieldLabel" destination="ict-tg-StO" id="Lrd-xr-bDr"/>
+                                            <outlet property="valueLabel" destination="vbG-OT-llI" id="H80-VS-YWC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="delegate" destination="x8o-10-R36" id="ht5-EQ-MH4"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FzJ-Ls-Gf5" secondAttribute="trailing" id="0ug-v8-rAZ"/>
+                            <constraint firstItem="FzJ-Ls-Gf5" firstAttribute="leading" secondItem="3BF-Y8-9PG" secondAttribute="leading" id="5nb-Wq-a1v"/>
+                            <constraint firstItem="FzJ-Ls-Gf5" firstAttribute="top" secondItem="zhk-0i-9YA" secondAttribute="bottom" id="MBG-cW-N8n"/>
+                            <constraint firstItem="ksj-gk-qwb" firstAttribute="top" secondItem="FzJ-Ls-Gf5" secondAttribute="bottom" id="MGa-Ux-Skl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="restaurantImageView" destination="ZYp-2k-1bb" id="Rmq-1Q-9e0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L1U-Ld-aKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1509" y="326"/>
+        </scene>
+        <!--Food Pin-->
+        <scene sceneID="wgF-n9-K9x">
+            <objects>
+                <navigationController title="Food Pin" automaticallyAdjustsScrollViewInsets="NO" id="9sB-Cc-SUX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="69V-zX-NoA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.92941176469999998" green="0.44705882349999998" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ikf-rM-uNV" kind="relationship" relationship="rootViewController" id="usR-ak-LvZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r5H-Xs-FNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-10" y="326"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cafedeadend" width="640" height="640"/>
+    </resources>
 </document>
