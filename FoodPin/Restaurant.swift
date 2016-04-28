@@ -15,6 +15,7 @@ class Restaurant {
     private var _location:String!
     private var _image:String!
     private var _isVisited:Bool!
+    private var _phoneNumber:String!
     
     var name:String!{
         return _name
@@ -31,11 +32,17 @@ class Restaurant {
     var isVisited:Bool!{
         return _isVisited
     }
-    init(name:String, type:String, location:String, image:String, isVisited:Bool) {
+    var phoneNumber:String!{
+        return _phoneNumber
+    }
+    
+    init(name:String, type:String, location:String,phoneNumber:String, image:String, isVisited:Bool) {
         self._name = name
         self._type = type
         self._location = location
+        self._phoneNumber = phoneNumber
         self._image = image
-        self._isVisited = isVisited}
+        self._isVisited = isVisited
+    }
     
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840D61411CD27D25005E0E44 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D61401CD27D24005E0E44 /* ReviewViewController.swift */; };
 		844D14AB1CCE281000E06DDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D14AA1CCE281000E06DDA /* AppDelegate.swift */; };
 		844D14B01CCE281000E06DDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844D14AE1CCE281000E06DDA /* Main.storyboard */; };
 		844D14B21CCE281000E06DDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844D14B11CCE281000E06DDA /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		840D61401CD27D24005E0E44 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		844D14A71CCE281000E06DDA /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		844D14AA1CCE281000E06DDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844D14AF1CCE281000E06DDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,10 +70,11 @@
 				844D14B31CCE281000E06DDA /* LaunchScreen.storyboard */,
 				844D14B61CCE281000E06DDA /* Info.plist */,
 				844D14BC1CCE3D1F00E06DDA /* RestaurantTableViewController.swift */,
-				844D14BE1CCE50F200E06DDA /* RestaurantTableViewCell.swift */,
 				84A60C7C1CD107130030D398 /* RestaurantDetailViewController.swift */,
+				844D14BE1CCE50F200E06DDA /* RestaurantTableViewCell.swift */,
 				84A60C7E1CD111DC0030D398 /* Restaurant.swift */,
 				84A60C801CD11FF70030D398 /* RestaurantDetailTableViewCell.swift */,
+				840D61401CD27D24005E0E44 /* ReviewViewController.swift */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";
@@ -108,6 +111,7 @@
 				TargetAttributes = {
 					844D14A61CCE281000E06DDA = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = HQ84JSVT4N;
 					};
 				};
 			};
@@ -149,6 +153,7 @@
 			files = (
 				84A60C7F1CD111DC0030D398 /* Restaurant.swift in Sources */,
 				844D14AB1CCE281000E06DDA /* AppDelegate.swift in Sources */,
+				840D61411CD27D25005E0E44 /* ReviewViewController.swift in Sources */,
 				844D14BF1CCE50F200E06DDA /* RestaurantTableViewCell.swift in Sources */,
 				84A60C811CD11FF70030D398 /* RestaurantDetailTableViewCell.swift in Sources */,
 				84A60C7D1CD107130030D398 /* RestaurantDetailViewController.swift in Sources */,
@@ -265,10 +270,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodPin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Sviridov.FoodPin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -276,10 +285,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FoodPin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Sviridov.FoodPin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
