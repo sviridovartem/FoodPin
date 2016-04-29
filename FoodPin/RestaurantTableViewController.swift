@@ -164,8 +164,11 @@ class RestaurantTableViewController: UITableViewController {
             }
         }
     }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = true
+    }
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) {
     }
 }
