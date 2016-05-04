@@ -8,20 +8,19 @@
 
 import UIKit
 
-class WalkthroughContentViewController: UIViewController,UIPageViewControllerDataSource {
+class WalkthroughContentViewController: UIViewController{
     
     @IBOutlet var headingLabel:UILabel!
     @IBOutlet var contentLabel:UILabel!
     @IBOutlet var contentImageView:UIImageView!
+    @IBOutlet var pageControl:UIPageControl!
+    @IBOutlet var forwardButton:UIButton!
     
     var index = 0
     var heading = ""
     var imageFile = ""
     var content = ""
     
-    var pageHeadings = ["Personalize", "Locate", "Discover"]
-    var pageImages = ["foodpin-intro-1", "foodpin-intro-2", "foodpin-intro-3"]
-    var pageContent = ["Pin your favorite restaurants and create your own food guide", "Search and locate your favourite restaurant on Maps","Find restaurants pinned by your friends and other foodies around the world"]
     
     
     override func viewDidLoad() {
@@ -30,48 +29,34 @@ class WalkthroughContentViewController: UIViewController,UIPageViewControllerDat
         headingLabel.text = heading
         contentLabel.text = content
         contentImageView.image = UIImage(named: imageFile)
-        dataSource = self
-        if let startingViewController = viewControllerAtIndex(0) {
-            setViewControllers([startingViewController], direction: .Forward,animated:true, completion:nil)
+        pageControl.currentPage = index
+        
+        switch index {
+        case 0...1: forwardButton.setTitle("NEXT", forState: UIControlState.Normal)
+        case 2: forwardButton.setTitle("DONE", forState: UIControlState.Normal)
+        default: break
+        }
+
+    }
+    
+    @IBAction func nextButtonTapped(sender: UIButton) {
+        switch index {
+        case 0...1:
+            let pageViewController = parentViewController as!
+            WalkthroughPageViewController
+            pageViewController.forward(index)
+        case 2:
+            dismissViewControllerAnimated(true, completion: nil)
+        default: break
         }
     }
-        
-        
     
+    @IBAction func close(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: "hasViewedWalkthrough")
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerAfterViewController viewController: UIViewController) ->
-        UIViewController? {
-            var index = (viewController as! WalkthroughContentViewController).index
-            index += 1
-            return viewControllerAtIndex(index)
-    }
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerBeforeViewController viewController: UIViewController) ->
-        UIViewController? {
-            var index = (viewController as! WalkthroughContentViewController).index
-            index -= 1
-            return viewControllerAtIndex(index)
-    }
-    func viewControllerAtIndex(index: Int) -> WalkthroughContentViewController? {
-        if index == NSNotFound || index < 0 || index >= pageHeadings.count {
-            return nil
-        }
-        // Create a new view controller and pass suitable data.
-        if let pageContentViewController =
-            storyboard?.instantiateViewControllerWithIdentifier("WalkthroughContentViewController")
-                as? WalkthroughContentViewController {
-            pageContentViewController.imageFile = pageImages[index]
-            pageContentViewController.heading = pageHeadings[index]
-            pageContentViewController.content = pageContent[index]
-            pageContentViewController.index = index
-            return pageContentViewController
-        }
-        return nil }
 }
+
