@@ -1,10 +1,4 @@
-//
-//  RestaurantTableViewController.swift
-//  FoodPin
-//
-//  Created by Admin on 25.04.16.
-//  Copyright © 2016 Sviridov. All rights reserved.
-//
+
 import UIKit
 import CoreData
 
@@ -18,12 +12,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        if let pageViewController = storyboard?.instantiateViewControllerWithIdentifier("WalkthroughController") as? WalkthroughPageViewController {
-            presentViewController(pageViewController, animated: true, completion:nil)}
-        
-        
+
         // Remove the title of the back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
@@ -59,13 +48,29 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         searchController.searchBar.placeholder = "Search restaurants..."
         searchController.searchBar.tintColor = UIColor(red: 100.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0)
         searchController.searchBar.barTintColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.6)
-        
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = true
+
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let hasViewedWalkthrough = defaults.boolForKey("hasViewedWalkthrough")
+        
+        if hasViewedWalkthrough {
+            return
+        }
+        
+        if let pageViewController = storyboard?.instantiateViewControllerWithIdentifier("WalkthroughController") as? WalkthroughPageViewController {
+            
+            presentViewController(pageViewController, animated: true, completion: nil)
+        }
         
     }
     
@@ -73,13 +78,13 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.active {
             return searchResults.count
@@ -87,7 +92,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
             return restaurants.count
         }
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cellIdentifier = "Cell"
@@ -96,10 +101,10 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         let restaurant = (searchController.active) ? searchResults[indexPath.row] : restaurants[indexPath.row]
         
         // Configure the cell...
-        cell.nameLable.text = restaurant.name
+        cell.nameLabel.text = restaurant.name
         cell.thumbnailImageView.image = UIImage(data: restaurant.image!)
-        cell.locationLable.text = restaurant.location
-        cell.typeLable.text = restaurant.type
+        cell.locationLabel.text = restaurant.location
+        cell.typeLabel.text = restaurant.type
         
         if let isVisited = restaurant.isVisited?.boolValue {
             cell.accessoryType = isVisited ? .Checkmark : .None
@@ -109,7 +114,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     // MARK: - Table view delegate
-    
+ 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == .Delete {
@@ -152,7 +157,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         // Set the button color
         shareAction.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue: 253.0/255.0, alpha: 1.0)
         deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
-        
+
         return [deleteAction, shareAction]
     }
     
@@ -163,10 +168,10 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
             return true
         }
     }
-    
+
     
     // MARK: - Navigation
-    
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showRestaurantDetail" {
@@ -188,7 +193,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
+            
         switch type {
         case .Insert:
             if let _newIndexPath = newIndexPath {
@@ -202,18 +207,18 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
             if let _indexPath = indexPath {
                 tableView.reloadRowsAtIndexPaths([_indexPath], withRowAnimation: .Fade)
             }
-            
+        
         default:
             tableView.reloadData()
         }
-        
+            
         restaurants = controller.fetchedObjects as! [Restaurant]
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.endUpdates()
     }
-    
+
     // MARK: - Search
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -227,22 +232,9 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         searchResults = restaurants.filter({ (restaurant:Restaurant) -> Bool in
             let nameMatch = restaurant.name.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             let locationMatch = restaurant.location.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            
+        
             return nameMatch != nil || locationMatch != nil
         })
-    }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let hasViewedWalkthrough = defaults.boolForKey("hasViewedWalkthrough")
-        if hasViewedWalkthrough {
-            return
-        }
-        if let pageViewController =
-            storyboard?.instantiateViewControllerWithIdentifier("WalkthroughController")
-                as? WalkthroughPageViewController {
-            presentViewController(pageViewController, animated: true, completion: nil)
-        }
     }
 }
 

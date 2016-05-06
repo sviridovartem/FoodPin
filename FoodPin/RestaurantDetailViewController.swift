@@ -1,41 +1,44 @@
-//
-//  RestaurantDetailViewController.swift
-//  FoodPin
-//
-//  Created by Admin on 27.04.16.
-//  Copyright © 2016 Sviridov. All rights reserved.
-//
 
 import UIKit
 
-class RestaurantDetailViewController: UIViewController, UITableViewDataSource,
-UITableViewDelegate {
+class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet var restaurantImageView:UIImageView!
     
-    @IBOutlet weak var restaurantImageView:UIImageView!
-    @IBOutlet weak var tableView:UITableView!
+    @IBOutlet var tableView:UITableView!
+    
     @IBOutlet var ratingButton:UIButton!
     
-    
-   // @IBOutlet weak var restaurantNameLabel:UILabel!
-   // @IBOutlet weak var restaurantTypeLabel:UILabel!
-   // @IBOutlet weak var restaurantLocationLabel:UILabel!
-    
     var restaurant:Restaurant!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // Do any additional setup after loading the view.
         restaurantImageView.image = UIImage(data: restaurant.image!)
-        tableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue:240.0/255.0, alpha: 0.2)
+        
+        // Change the color of the table view
+        tableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.2)
+        
+        // Remove the separators of the empty rows
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue:240.0/255.0, alpha: 0.8)
+        
+        // Change the color of the separator
+        tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
+        
+        // Set the title of the navigation bar
         title = restaurant.name
-        navigationController?.hidesBarsOnSwipe = false
+        
+        // Enable self sizing cells
         tableView.estimatedRowHeight = 36.0
         tableView.rowHeight = UITableViewAutomaticDimension
+
+        // Set the rating of the restaurant
+        if let rating = restaurant.rating where rating != "" {
+            ratingButton.setImage(UIImage(named: rating), forState: UIControlState.Normal)
+        }
         
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -84,7 +87,7 @@ UITableViewDelegate {
         return cell
     }
     
-    
+
     @IBAction func close(segue:UIStoryboardSegue) {
         if let reviewViewController = segue.sourceViewController as? ReviewViewController {
             if let rating = reviewViewController.rating {
@@ -105,7 +108,7 @@ UITableViewDelegate {
     
     
     // MARK: - Navigation
-    
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showMap" {
@@ -114,5 +117,5 @@ UITableViewDelegate {
         }
     }
     
-    
+
 }
